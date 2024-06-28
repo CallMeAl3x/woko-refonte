@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client";
+import { IPost } from "../types/IPosts";
 
 async function getPosts() {
   const query = `
@@ -21,7 +22,7 @@ export default async function Home() {
     <div>
       <div>
         {posts?.length > 0 &&
-          posts?.map((post) => <p key={post._id}>{post.title}</p>)}
+          posts?.map((post: IPost) => <p key={post._id}>{post.title}</p>)}
       </div>
     </div>
   );

@@ -4,4 +4,5 @@ export interface IPost {
   plublishedAt: string;
   execerpt: boolean;
   body: any;
+  _id: number;
 }
