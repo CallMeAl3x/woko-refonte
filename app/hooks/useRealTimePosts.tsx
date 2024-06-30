@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { IPost, isIPost } from "../types/IPosts";
+import { IPost } from "../types/IPosts";
 import { client } from "@/sanity/lib/client";
 
 const query =
@@ -13,7 +13,7 @@ const useRealTimePosts = (): IPost[] => {
 
   useEffect(() => {
     const fetchInitialPosts = async () => {
-      const initialPosts = await client.fetch(query);
+      const initialPosts: IPost[] = await client.fetch(query);
       setPosts(initialPosts);
     };
 
@@ -21,17 +21,8 @@ const useRealTimePosts = (): IPost[] => {
 
     const subscription = client.listen(query).subscribe((update) => {
       const result = update.result;
-      if (result && isIPost(result)) {
-        setPosts((prevPosts) => {
-          const postExists = prevPosts.some((post) => post._id === result._id);
-          if (postExists) {
-            return prevPosts.map((post) =>
-              post._id === result._id ? result : post
-            );
-          } else {
-            return [...prevPosts, result];
-          }
-        });
+      if (result) {
+        window.location.reload();
       }
     });
 

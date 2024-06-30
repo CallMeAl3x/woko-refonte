@@ -4,7 +4,6 @@ import { IPost } from "../types/IPosts";
 
 export default function Home() {
   const posts = useRealTimePosts();
-  console.log(posts, "posts");
 
   return (
     <div>
